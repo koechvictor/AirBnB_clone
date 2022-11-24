@@ -20,7 +20,13 @@ class BaseModel:
             self.updated_at = dt.now()
             storage.new(self)
 
-    def save(self):
+     def __str__(self):
+         """ prints string representing the class 
+         [<class name>] (<self.id>) <self.__dict__> """
+         return ("[{}] ({}) {}".format
+                 (type(self).__name__, self.id, self.__dict__))
+
+     def save(self):
         """ updates public instance attribute update_at with current datetime """
         self.updated_at = dt.now()
         storage.save()
