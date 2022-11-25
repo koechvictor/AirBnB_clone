@@ -20,6 +20,22 @@ classes = {"BaseModel": BaseModel,
            "State": State,
            "User": User}
 
+class HBNBCommand(cmd.Cmd):
+     """ entry point of the command interpreter """
+    
+    prompt = "(hbnb) "
+    def do_quit(self, args):
+        """ Quits the program """
+        return True
+
+    def emptyline(self):
+        """ handles empty lines """
+        pass
+
+    def do_EOF(self, args):
+        """ Reads EOF and exits """
+        return True
+
         def do_create(self,args):
             """ creates a new instance of BaseModel """
             if not args:
