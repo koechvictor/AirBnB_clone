@@ -1,18 +1,18 @@
 #!/usr/bin/python3
-""" Class BaseModel defines common attributes/methods for other classes"""i
+""" Class BaseModel defines common attributes/methods for other classes"""
 
 import uuid
 from datetime import datetime as dt
 
 class BaseModel:
-    ""' Class BaseModel""'
+    """ Class BaseModel"""
 
     def __init__(self, *ags, **kwargs):
         """initalize a new instance of BaseModel class
         using argments and keyword arguments """
         
         if kwargs and kwargs != []:
-            value = kwargs["created_at"]
+            valuei = kwargs["created_at"]
             self.id = kwargs["id"]
             self.updated_at = self.created_at
         else:
