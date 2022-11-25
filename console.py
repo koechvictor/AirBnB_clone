@@ -84,3 +84,15 @@ class HBNBCommand(cmd.Cmd):
                              except:
                                   print("** no instance found **")
 
+              def do_all(self, args):
+                  args = args.split()
+                  objs = storage.all()
+                  if args and args[0] not in classes.keys():
+                      print("** class doesn't exist **")
+                  else:
+                      for key in objs.keys():
+                          if args:
+                              if args[0] == key.split(".")[0]:
+                                   print(objs[key])
+                               else:
+                                   print(objs[key])
