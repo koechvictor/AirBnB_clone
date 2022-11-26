@@ -69,55 +69,62 @@ class HBNBCommand(cmd.Cmd):
                     return
             print("** no instance found **")
 
-            def do_destroy(self, args):
-                if not args:
-                    args = args.split()
-                    objs = storage.all()
-                     if not args[0] in classes.keys():
-                         print("** class doesn't exist **")
-                     elif len(args) < 2:
-                         print("** instance id missing **")
-                     else:
-                         try:
-                             del objs[args[0] + "." + args[1]]
-                             storage.save()
-                             except:
-                                  print("** no instance found **")
+    def do_destroy(self, args):
+        """ Destroys instance based on class and id
+            args comes in as two values class and id <class ID> """
+        if not args:
+            print("** class name missing **")
+            return
+        args = args.split()
+        objs = storage.all()
+        if not args[0] in classes.keys():
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            try:
+                del objs[args[0] + "." + args[1]]
+                storage.save()
+            except:
+                print("** no instance found **")
 
-              def do_all(self, args):
-                  args = args.split()
-                  objs = storage.all()
-                  if args and args[0] not in classes.keys():
-                      print("** class doesn't exist **")
-                  else:
-                      for key in objs.keys():
-                          if args:
-                              if args[0] == key.split(".")[0]:
-                                   print(objs[key])
-                               else:
-                                   print(objs[key])
+    def do_all(self, args):
+        """Prints all instances based or not on the class name """
+        args = args.split()
+        objs = storage.all()
+        if args and args[0] not in classes.keys():
+            print("** class doesn't exist **")
+        else:
+            for key in objs.keys():
+                if args:
+                    if args[0] == key.split(".")[0]:
+                        print(objs[key])
+                else:
+                    print(objs[key])
 
-                def do_update(self, args):
-                     args = args.split()
-                     size = len(args)
-                     objs = storage.all()
-                     if not args:
-                          print("** class name missing **")
-                     elif not args[0] in classes.keys():
-                          print("** class doesn't exist **")
-                      elif size < 2:
-                          print("** instance id missing **")
-                      elif not ".".join([args[0], args[1]]) in objs.keys():
-                           print("** no instance found **")
-                      elif size < 3:
-                           print("** attribute name missing **")
-                       elif size < 4:
-                            print("** value missing **")
-                        else:
-                            obj = objs[".".join([args[0], args[1]])]
-                            setattr(obj, args[2], args[3])
-                            storage.save()
-
-
-
-
+    def do_update(self, args):
+        """ Updates an instance based on the class name and id by adding
+        or updating attribute (save the change into the JSON file)"""
+        args = args.split()
+        size = len(args)
+        objs = storage.all()
+        if not args:
+            print("** class name missing **")
+        elif not args[0] in classes.keys():
+            print("** class doesn't exist **")
+        elif size < 2:
+            print("** instance id missing **")
+        elif not ".".join([args[0], args[1]]) in objs.keys():
+            print("** no instance found **")
+        elif size < 3:
+            print("** attribute name missing **")
+        elif size < 4:
+            print("** value missing **")
+        else:
+            try:
+                obj = objs[".".join([args[0], args[1]])]
+                setattr(obj, args[2], args[3])
+                storage.save()
+            except Exception as e:
+                print(e)
+                print("** Update fail **")
