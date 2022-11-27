@@ -4,6 +4,7 @@ takes in user infomation """
 
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
     """ Class User inherits from BaseModel """
 
