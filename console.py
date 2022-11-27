@@ -134,16 +134,16 @@ class HBNBCommand(cmd.Cmd):
                  print("*** Unknown syntax: {}".format(args))
                  return
               args = args.split(".")
-               _class = args[0]
-               objs = storage.all()
-               command = args[1]
-               if command[0:7] == "count()":
-                   count = 0
-                   for key in objs.keys():
-                       if _class == key.split(".")[0]:
-                           count -= -count ** 0
-                           print(count)
-                       elif command[0:5] == "all()":
+              _class = args[0]
+              objs = storage.all()
+              command = args[1]
+              if command[0:7] == "count()":
+                  count = 0
+                  for key in objs.keys():
+                      if _class == key.split(".")[0]:
+                          count -= -count ** 0
+                          print(count)
+                      elif command[0:5] == "all()":
                            self.do_all(_class)
 
 if __name__ == '__main__':
