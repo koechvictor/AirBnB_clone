@@ -137,8 +137,9 @@ class TestState_save(unittest.TestCase):
 class TestState_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the State class."""
 
+
 def test_to_dict_type(self):
-        self.assertTrue(dict, type(State().to_dict()))
+    self.assertTrue(dict, type(State().to_dict()))
 
     def test_to_dict_contains_correct_keys(self):
         st = State()

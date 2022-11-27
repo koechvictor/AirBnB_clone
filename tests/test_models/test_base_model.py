@@ -132,16 +132,17 @@ class TestBaseModel(unittest.TestCase):
                                if not k.startswith("_")}
         self.assertEqual(len(b.to_dict()), len(partial_expectation) + 1)
 
+
 def test_when_kwargs_passed_is_empty(self):
-        """
-        Checks that id, created_at and updated_at are automatically
-        generated if they're not in kwargs
-        """
-        my_dict = {}
-        b = BaseModel(**my_dict)
-        self.assertTrue(type(b.id) is str)
-        self.assertTrue(type(b.created_at) is datetime)
-        self.assertTrue(type(b.updated_at) is datetime)
+    """
+    Checks that id, created_at and updated_at are automatically
+    generated if they're not in kwargs
+    """
+    my_dict = {}
+    b = BaseModel(**my_dict)
+    self.assertTrue(type(b.id) is str)
+    self.assertTrue(type(b.created_at) is datetime)
+    self.assertTrue(type(b.updated_at) is datetime)
 
     def test_when_kwargs_passed_is_not_empty(self):
         """

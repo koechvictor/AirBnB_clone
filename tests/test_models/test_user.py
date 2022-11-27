@@ -76,13 +76,14 @@ class TestUser_instantiation(unittest.TestCase):
         us = User(None)
         self.assertNotIn(None, us.__dict__.values())
 
+
 def test_instantiation_with_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        us = User(id="345", created_at=dt_iso, updated_at=dt_iso)
-        self.assertEqual(us.id, "345")
-        self.assertEqual(us.created_at, dt)
-        self.assertEqual(us.updated_at, dt)
+    dt = datetime.today()
+    dt_iso = dt.isoformat()
+    us = User(id="345", created_at=dt_iso, updated_at=dt_iso)
+    self.assertEqual(us.id, "345")
+    self.assertEqual(us.created_at, dt)
+    self.assertEqual(us.updated_at, dt)
 
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
@@ -116,16 +117,17 @@ class TestUser_save(unittest.TestCase):
         us.save()
         self.assertLess(first_updated_at, us.updated_at)
 
+
 def test_two_saves(self):
-        us = User()
-        sleep(0.05)
-        first_updated_at = us.updated_at
-        us.save()
-        second_updated_at = us.updated_at
-        self.assertLess(first_updated_at, second_updated_at)
-        sleep(0.05)
-        us.save()
-        self.assertLess(second_updated_at, us.updated_at)
+    us = User()
+    sleep(0.05)
+    first_updated_at = us.updated_at
+    us.save()
+    second_updated_at = us.updated_at
+    self.assertLess(first_updated_at, second_updated_at)
+    sleep(0.05)
+    us.save()
+    self.assertLess(second_updated_at, us.updated_at)
 
     def test_save_with_arg(self):
         us = User()
